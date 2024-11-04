@@ -1,0 +1,43 @@
+.showDetails {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+        padding: 1rem;
+    }
+
+    .header {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+    }
+
+    .episodeList {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+
+        .episode {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &:hover {
+                background: #f5f5f5;
+            }
+        }
+    }
+}

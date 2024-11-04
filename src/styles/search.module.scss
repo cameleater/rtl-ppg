@@ -1,0 +1,49 @@
+.searchContainer {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+        padding: 1rem;
+    }
+
+    .searchInput {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .showGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+
+        @media (max-width: 768px) {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+    }
+
+    .showCard {
+        cursor: pointer;
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        h3 {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+    }
+}
