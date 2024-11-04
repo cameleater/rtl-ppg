@@ -1,17 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import useShowStore from "@/store/shows";
-import styles from "../styles/search.module.scss";
+import Image from "next/image";
+import type { SearchResult } from "@/types/tvmaze";
+import styles from "@/styles/search.module.scss";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const { searchResults, setSearchResults } = useShowStore();
   const router = useRouter();
 
-  const handleSearch = async (e) => {
+  const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
 
@@ -19,19 +20,21 @@ export default function Home() {
       const response = await fetch(
         `https://api.tvmaze.com/search/shows?q=${searchQuery}`
       );
-      const data = await response.json();
+      if (!response.ok) throw new Error("Failed to fetch");
+      const data: SearchResult[] = await response.json();
       setSearchResults(data);
     } catch (error) {
-      console.error("Search failed:", error);
+      console.error("Search error:", error);
     }
   };
 
   return (
-    <main className={styles.searchContainer}>
+    <div className={styles.searchContainer}>
+      <h1>ShowMe</h1>
       <form onSubmit={handleSearch}>
         <input
-          className={styles.searchInput}
           type="text"
+          className={styles.searchInput}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search TV shows..."
@@ -53,10 +56,10 @@ export default function Home() {
                 height={350}
               />
             )}
-            <h2>{show.name}</h2>
+            <h3>{show.name}</h3>
           </div>
         ))}
       </div>
-    </main>
+    </div>
   );
 }

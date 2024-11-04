@@ -1,6 +1,17 @@
 import { create } from "zustand";
+import type { Show, Episode, SearchResult } from "@/types/tvmaze";
 
-const useShowStore = create((set, get) => ({
+interface ShowStore {
+  searchResults: SearchResult[];
+  currentShow: Show | null;
+  episodes: Episode[];
+  setSearchResults: (results: SearchResult[]) => void;
+  setCurrentShow: (show: Show) => void;
+  setEpisodes: (episodes: Episode[]) => void;
+  clearShow: () => void;
+}
+
+const useShowStore = create<ShowStore>((set) => ({
   searchResults: [],
   currentShow: null,
   episodes: [],
